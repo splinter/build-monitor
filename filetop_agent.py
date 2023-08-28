@@ -35,7 +35,7 @@ def print_event(cpu, data,size):
     event = b["events"].event(data)
     map[event.name] =1
     
-    if(event.name.decode().index("html") > 0):
+    if(event.name.decode().find("html") > 0):
         print(event.name)
 
 b["events"].open_perf_buffer(print_event)
