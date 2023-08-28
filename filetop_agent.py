@@ -37,6 +37,7 @@ def print_event(cpu, data,size):
     
     if(event.name.decode().find("html") > 0):
         print(event.name)
+        event_client.log_event(event.name.decode())
 
 b["events"].open_perf_buffer(print_event)
 event_client.start_client()
