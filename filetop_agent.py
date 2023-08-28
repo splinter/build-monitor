@@ -19,7 +19,7 @@ int on_read(struct pt_regs *ctx, struct file * file,char  __user *buf,size_t cou
     struct dentry *de = file ->f_path.dentry;
     struct qstr d_name = de->d_name;
     struct data_t data = {};
-    bpf_probe_read_kernel(&data.name,sizeof(data.name),d_name.name)
+    bpf_probe_read_kernel(&data.name,sizeof(data.name),d_name.name);
     events.perf_submit(ctx,&data,sizeof(data)); 
     return 0;
 }
