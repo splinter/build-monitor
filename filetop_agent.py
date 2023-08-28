@@ -30,10 +30,12 @@ b = BPF(text=bpf_text)
 b.attach_kprobe(event= "vfs_read" , fn_name="on_read")
 #b.attach_kprobe(event= b.get_syscall_prefix().decode() + 'openat', fn_name="on_read")
 
+map = {}
 def print_event(cpu, data,size):
     event = b["events"].event(data)
-    print("Recieved event")
-    print(event.name)
+    map[event.name] =1
+    if(event.name.indexof("html")):
+        print(event.name)
 
 b["events"].open_perf_buffer(print_event)
 event_client.start_client()
