@@ -27,7 +27,7 @@ int on_read(struct pt_regs *ctx, struct file * file,char  __user *buf,size_t cou
 """
 DNAME_INLINE_LEN = 32
 b = BPF(text=bpf_text)
-b.attach_kprobe(event= "vfs_read" + 'open', fn_name="on_read")
+b.attach_kprobe(event= "vfs_read" , fn_name="on_read")
 #b.attach_kprobe(event= b.get_syscall_prefix().decode() + 'openat', fn_name="on_read")
 
 def print_event(cpu, data,size):
