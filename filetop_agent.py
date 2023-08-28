@@ -31,7 +31,7 @@ b.attach_kprobe(event= b.get_syscall_prefix().decode() + 'openat', fn_name="on_r
 def print_event(cpu, data,size):
     event = b["events"].event(data)
     print("Recieved event")
-    print(event.file_name)
+    print(event.filename)
 
 b["events"].open_perf_buffer(print_event)
 event_client.start_client()
