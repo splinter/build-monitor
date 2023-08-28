@@ -11,13 +11,13 @@ struct data_t {
     u32 pid;
     u64 ts;
     char comm[TASK_COMM_LEN];
-    const char *filename;
+    char filename[NAME_MAX];
 };
 BPF_PERF_OUTPUT(events);
 
 int on_read(struct pt_regs *ctx, int dfd, const char __user *filename, int flags){
     struct data_t data = {};
-    data.filename = filename;
+    data.filename = *filename;
     events.perf_submit(ctx,&data,sizeof(data)); 
     return 0;
 }
