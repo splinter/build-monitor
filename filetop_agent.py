@@ -17,7 +17,7 @@ BPF_PERF_OUTPUT(events);
 
 int on_read(struct pt_regs *ctx, int dfd, const char __user *filename, int flags){
     struct data_t data = {};
-    strncpy(data.filename,filename,NAME_MAX)
+    strncpy(data.filename,filename,NAME_MAX);
     events.perf_submit(ctx,&data,sizeof(data)); 
     return 0;
 }
