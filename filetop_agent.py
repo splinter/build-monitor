@@ -2,7 +2,7 @@ import event_client
 from bcc import BPF
 
 bpf_text= """
-
+#include <uapi/linux/ptrace.h>
 #include <linux/fs_struct.h>
 #include <linux/dcache.h>
 
@@ -17,8 +17,9 @@ BPF_PERF_OUTPUT(events);
 
 int on_read(struct pt_regs *ctx, struct file * file,char  __user *buf,size_t count,int is_read){
 
-    strcut dentry *de = file -> f_path.dentry;
+    struct dentry *de = file -> f_path.dentry;
     struct qstr d_name = de->d_name;
+    struct data_t data = {}
     bpf_probe_read_kernel(&data.name,sizeof(data.name),d_name.name)
     events.perf_submit(ctx,&data,sizeof(data)); 
     return 0;
