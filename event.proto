@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message EventRequest {
+    string eventName = 1;
+}
+
+message EventReply {
+    bool ok = 1;
+}
+
+service EventLogger {
+    rpc SendEvent(EventRequest) returns (EventReply) {}
+    rpc SendEventStreamReply(EventRequest) returns (stream EventReply) {}
+}
