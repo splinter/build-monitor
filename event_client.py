@@ -4,11 +4,11 @@ import time
 import grpc
 import event_pb2_grpc
 import event_pb2
+import queue
 
-events=[]
-
+q = queue.Queue()
 def log_event(event):
-    events.append(event)    
+    q.put(event)  
     return
 
 def loop():
@@ -17,11 +17,10 @@ def loop():
         stub = event_pb2_grpc.EventLoggerStub(channel)
         print("Start")
         while True:
+            item = q.get()
             logging.debug("Sending events")
-            if(len(events)>0):
-                event = events.pop()
-                response = stub.SendEvent(event_pb2.EventRequest(eventName=event))
-            time.sleep(10)
+            response = stub.SendEvent(event_pb2.EventRequest(eventName=item))
+            q.task_done()
     
 
 def start_client():
