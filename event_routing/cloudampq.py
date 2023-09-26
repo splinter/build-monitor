@@ -13,6 +13,6 @@ class CloudAmpqDestination:
         self.channel.queue_declare("events")
         return
     def publish(self,event):
-        self.channel.basic_publish(exchange="",routing_key=configs["cloudamqp"]["routeKey"], body=str(event))
+        self.channel.basic_publish(exchange="",routing_key="", body=str(event))
 
     
