@@ -37,27 +37,19 @@ class QueueService:
         logging.info("Successfully registered filter")
         self.eventHandlers.append(pluginHandler)
         return
-    def register_analyzer_plugin(self,plugin):
+    def register_analyzer_plugin(self,pluginHandler):
         return
     def manage_event_queue(self):
-        logging.info("Started queue")
         while True:
-            logging.info(self.events.qsize())
-            try:
-                event = self.events.get()
-            except queue.Empty as error:
-                logging.info("Queue is empty")
-            logging.info(event)
-            logging.info("Got item")
+            event = self.events.get()
             for handler in self.eventHandlers:
-                try:
-                    err = handler(event)
-                except:
-                    print("Error encountered when handling ")
-                if err == True:
-                    print("Event been dropped by filter ")
+                filtered = handler(event)
+                if filtered:
+                    self.filteredEvents.put(event)
             self.events.task_done()
         time.sleep(1)
+    def manage_filtered_event_queue():
+        return
 
 class GraphService:
     def upsert_process():

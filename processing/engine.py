@@ -8,6 +8,7 @@ import threading
 import time
 from processing.plugins_core import DataPlugin,FilterPlugin
 from processing.plugins_services import PluginServices
+from processing.plugin_config import is_plugin_enabled, get_plugin_config
 
 
 logger = logging.getLogger(__name__)
@@ -90,9 +91,12 @@ def start_plugins(plugins,pluginServices):
     threads = []
     for plugin in plugins:
         pluginInstance = plugins[plugin]()
+        if is_plugin_enabled(plugin) == False:
+            continue
         logger.info(f"Initializing plugin: {plugin}")
+        pluginConfig = get_plugin_config(plugin)
 
-        pluginInstance.init(pluginServices)
+        pluginInstance.init(pluginServices, pluginConfig)
         t = threading.Thread(target=pluginInstance.loop)
         t.start()
     return threads
@@ -104,6 +108,9 @@ def start_data_plugins(plugins,pluginServices):
 def start_filter_plugins(plugins,pluginServices):
     for plugin in plugins:
         pluginInstance = plugins[plugin]()
-        pluginInstance.init(pluginServices)
+        if is_plugin_enabled(plugin) == False:
+            continue
+        pluginConfig = get_plugin_config(plugin)
+        pluginInstance.init(pluginServices,pluginConfig)
         pluginServices.get_queue_service().register_filter_plugin(pluginInstance.filter)
     return

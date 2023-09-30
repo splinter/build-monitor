@@ -10,7 +10,7 @@ class ConfluentPlugin(DataPlugin):
     def __init__(self):
         pass
 
-    def init(self,plugin_services):
+    def init(self,plugin_services,pluginConfig):
         logger.info("Initializing the Confluent plugin")
         self.plugin_services = plugin_services
         return

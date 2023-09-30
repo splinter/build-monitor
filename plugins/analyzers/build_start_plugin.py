@@ -5,7 +5,7 @@ import logging
 logger =logging.getLogger(__name__)
 
 class BuildStartAnalyzerPlugin(AnalyzerPlugin):
-    def init(self, pluginServices)
+    def init(self, pluginServices):
         self.pluginServices = pluginServices
         pass
 
