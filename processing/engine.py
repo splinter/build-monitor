@@ -114,3 +114,13 @@ def start_filter_plugins(plugins,pluginServices):
         pluginInstance.init(pluginServices,pluginConfig)
         pluginServices.get_queue_service().register_filter_plugin(pluginInstance.filter)
     return
+
+def start_analyzer_plugins(plugins, pluginServices):
+    for plugin in plugins:
+        pluginInstance = plugins[plugin]()
+        if is_plugin_enabled(plugin) == False:
+            continue
+        pluginConfig = get_plugin_config(plugin)
+        pluginInstance.init(pluginServices, pluginConfig)
+        pluginServices.get_queue_service().register_analyzer_plugin(pluginInstance.analyze)
+    return

@@ -38,6 +38,7 @@ class QueueService:
         self.eventHandlers.append(pluginHandler)
         return
     def register_analyzer_plugin(self,pluginHandler):
+        self.filteredEventHandlers.append(pluginHandler)
         return
     def manage_event_queue(self):
         while True:
@@ -48,7 +49,13 @@ class QueueService:
                     self.filteredEvents.put(event)
             self.events.task_done()
         time.sleep(1)
-    def manage_filtered_event_queue():
+    def manage_filtered_event_queue(self):
+        while True:
+            event = self.filteredEvents.get()
+            for handler in self.filteredEventHandlers:
+                handler(event)
+            self.filteredEvents.task_done()
+        time.sleep(1)
         return
 
 class GraphService:
