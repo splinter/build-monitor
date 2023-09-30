@@ -17,7 +17,8 @@ class CloudAMPQPlugin(DataPlugin):
         self.plugin_services = pluginServices
         return
     def on_message(self,ch,method,properties,body):
-        self.plugin_services.get_queue_service().push_event("")
+        logger.info("Recieved message " + body)
+        self.plugin_services.get_queue_service().push_event(body)
     def loop(self):
         print(self.pluginConfig)
         connectionUrl = self.pluginConfig["connectionUrl"]
