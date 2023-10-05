@@ -32,7 +32,7 @@ class CloudAMPQPlugin(DataPlugin):
             pass
         if connectionUrl == "localhost":
             params = pika.ConnectionParameters(connectionUrl)
-        else
+        else:
             params = pika.URLParameters(connectionUrl)
         
         connection = pika.BlockingConnection(params)
