@@ -9,7 +9,10 @@ class CloudAmpqDestination:
         c = configs["cloudamqp"]["connectionUrl"]
         print(c)
         self.routingKey=configs["cloudamqp"]["routeKey"]
-        params = pika.URLParameters(c)
+        if c == "localhost":
+            params = pika.ConnectionParameters(c)
+        else:
+            params = pika.URLParameters(c)
         self.connection=pika.BlockingConnection(params)
         self.channel = self.connection.channel()
         self.channel.queue_declare("events")
