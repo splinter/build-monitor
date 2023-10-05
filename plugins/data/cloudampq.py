@@ -30,11 +30,11 @@ class CloudAMPQPlugin(DataPlugin):
         if connectionUrl is None:
             logger.error("Connection url is not deinfed in configuration")
             pass
-        if(connectionUrl == "localhost"){
+        if connectionUrl == "localhost":
             params = pika.ConnectionParameters(connectionUrl)
-        } else {
+        else
             params = pika.URLParameters(connectionUrl)
-        }
+        
         connection = pika.BlockingConnection(params)
         channel = connection.channel()
         channel.basic_consume(queue=queue,
