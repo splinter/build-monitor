@@ -17,8 +17,8 @@ class CloudAMPQPlugin(DataPlugin):
         self.plugin_services = pluginServices
         return
     def on_message(self,ch,method,properties,body):
-        logger.info("Recieved message " + body)
-        self.plugin_services.get_queue_service().push_event(body)
+        logger.info("Recieved message " + str(body))
+        self.plugin_services.get_queue_service().push_event(str(body))
     def loop(self):
         print(self.pluginConfig)
         connectionUrl = self.pluginConfig["connectionUrl"]
@@ -30,7 +30,11 @@ class CloudAMPQPlugin(DataPlugin):
         if connectionUrl is None:
             logger.error("Connection url is not deinfed in configuration")
             pass
-        params = pika.URLParameters(connectionUrl)
+        if(connectionUrl == "localhost"){
+            params = pika.ConnectionParameters(connectionUrl)
+        } else {
+            params = pika.URLParameters(connectionUrl)
+        }
         connection = pika.BlockingConnection(params)
         channel = connection.channel()
         channel.basic_consume(queue=queue,
