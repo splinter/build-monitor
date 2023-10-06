@@ -22,6 +22,7 @@ from bcc import BPF
 from bcc.utils import printb
 from bcc.syscall import syscall_name, syscalls
 from event_client import log_event
+from event_client import start_client
 import event_client
 
 if sys.version_info.major < 3:
