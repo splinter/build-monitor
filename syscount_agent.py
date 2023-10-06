@@ -262,7 +262,7 @@ def print_count_stats():
         if k.value == 0xFFFFFFFF:
             continue    # happens occasionally, we don't need it
         printb(b"%-22s %8d" % (agg_colval(k), v.value))
-        dat += agg_colval(k) + str(v.value)
+        dat += str(agg_colval(k)) + str(v.value)
     print("")
     log_event(dat)
     data.clear()
