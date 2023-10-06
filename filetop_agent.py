@@ -1,3 +1,17 @@
+#!/usr/bin/env python
+# @lint-avoid-python-3-compatibility-imports
+#
+# filetop  file reads and writes by process.
+#          For Linux, uses BCC, eBPF.
+#
+# USAGE: filetop.py [-h] [-C] [-r MAXROWS] [interval] [count]
+#
+# This uses in-kernel eBPF maps to store per process summaries for efficiency.
+#
+# Copyright 2016 Netflix, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License")
+#
+# 06-Feb-2016   Brendan Gregg   Created this.
 import event_client
 from bcc import BPF
 
