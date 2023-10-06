@@ -22,6 +22,7 @@ from bcc import BPF
 from bcc.utils import printb
 from bcc.syscall import syscall_name, syscalls
 from event_client import log_event
+import event_client
 
 if sys.version_info.major < 3:
     izip_longest = itertools.izip_longest
@@ -290,6 +291,7 @@ else:
         ("failed " if args.failures else "", args.top))
 exiting = 0 if args.interval else 1
 seconds = 0
+start_client()
 while True:
     try:
         sleep(args.interval)
