@@ -5,10 +5,13 @@ import grpc
 import event_pb2_grpc
 import event_pb2
 import queue
+from log import add_time
 
 q = queue.Queue()
 def log_event(event):
-    q.put(event)  
+    event= add_time(event)
+    q.put(event)
+
     return
 
 def loop():

@@ -6,12 +6,13 @@ import event_pb2_grpc
 import logging
 import time
 import threading
-
+from log import add_time
 
 class EventHandler(event_pb2_grpc.EventLogger):
     def SendEvent(self,request,context):
         logging.info("Recieved")
         print(request)
+        request=add_time(request)
         enqueue_data(request)
         return event_pb2.EventReply(ok=True)
     

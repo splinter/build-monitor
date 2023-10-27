@@ -3,7 +3,7 @@ import time
 import pika
 from processing.plugins_core import DataPlugin
 from processing.plugins_services import PluginServices
-
+from log import debug_time_info
 logger = logging.getLogger(__name__)
 
 class CloudAMPQPlugin(DataPlugin):
@@ -18,6 +18,7 @@ class CloudAMPQPlugin(DataPlugin):
         return
     def on_message(self,ch,method,properties,body):
         logger.info("Recieved message " + str(body))
+        debug_time_info(str(body))
         self.plugin_services.get_queue_service().push_event(str(body))
     def loop(self):
         print(self.pluginConfig)
