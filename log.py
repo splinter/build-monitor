@@ -6,8 +6,12 @@ def get_current_timestamp():
 
 def add_time(logMessage):
     now = get_current_timestamp()
-    if(logMessage.index("timedata") < 0):
-        logMessage += "timedata "
+    try:
+        if(logMessage.index("timedata") < 0):
+            logMessage += "timedata "
+    except Exception:
+        
+
     logMessage +=str(now)
     return logMessage
 
