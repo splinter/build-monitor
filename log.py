@@ -16,6 +16,7 @@ def add_time(logMessage):
 def debug_time_info(logMessage):
     now = get_current_timestamp()
     components = logMessage.split("timedata")
+    print(components)
     timestamps = components[1].split(" ")
     last = now
     details=""
