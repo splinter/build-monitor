@@ -22,9 +22,9 @@ def debug_time_info(logMessage):
     details=""
     lastHop= "current"
     
-    for i in range(len(timestamps)-1,1,-1):
+    for i in range(len(timestamps)-2,1,-1):
         print(i)
-        
+
         time = datetime.datetime.fromtimestamp(float(timestamps[i]))
         diff = last - time
         details=" hop "+ lastHop +" to hop" +  i + " = " + diff +"s "
