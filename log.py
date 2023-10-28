@@ -15,13 +15,13 @@ def add_time(logMessage):
 
 def debug_time_info(logMessage):
     now = get_current_timestamp()
-    logMessage+=str(now) + " "
+
     components = logMessage.split("timedata")
     print(components)
     timestamps = components[1].strip().split(" ")
     last = now
     details=""
-    lastHop= "0"
+    lastHop= len(timestamps)
     
     for i in range(len(timestamps)-2,0,-1):
         time = datetime.datetime.fromtimestamp(float(timestamps[i]))
@@ -29,5 +29,8 @@ def debug_time_info(logMessage):
         details = details + " hop "+ str(lastHop) +" to hop " +  str(i) + " = " + str(diff) +"s "
         last = time
         lastHop=i
-    details = details
+    time = datetime.datetime.fromtimestamp((float(timestamps[0])))
+    diff = (datetime.datetime.fromtimestamp(last) - time).total_seconds
+    i=0
+    details = details + " |  hop " + str(lastHop) + " to hop 0"+ str(i) + " = " + str(diff) + "s"
     logging.info(details)
