@@ -9,7 +9,7 @@ def add_time(logMessage):
     try:
         logMessage.index("timedata")
     except Exception:
-        logMessage+="timedata"
+        logMessage+=" timedata "
     logMessage +=str(now)
     return logMessage
 
