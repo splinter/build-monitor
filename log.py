@@ -21,6 +21,7 @@ def debug_time_info(logMessage):
     last = now
     details=""
     lastHop= "current"
+    print(timestamps)
     for i in range(len(timestamps),0):
         time = datetime.datetime.fromtimestamp(timestamps[i])
         diff = last - time
