@@ -12,7 +12,7 @@ class EventHandler(event_pb2_grpc.EventLogger):
     def SendEvent(self,request,context):
         logging.info("Recieved")
         print(request)
-        request=add_time(request)
+        request=add_time(request.eventName)
         enqueue_data(request)
         return event_pb2.EventReply(ok=True)
     
