@@ -10,7 +10,7 @@ def add_time(logMessage):
         logMessage.index("timedata")
     except Exception:
         logMessage+=" timedata "
-    logMessage +=str(now)
+    logMessage += str(now) + " "
     return logMessage
 
 def debug_time_info(logMessage):
