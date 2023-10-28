@@ -17,7 +17,7 @@ def debug_time_info(logMessage):
     now = get_current_timestamp()
     components = logMessage.split("timedata")
     print(components)
-    timestamps = components[1].split(" ")
+    timestamps = components[1].trim().split(" ")
     last = now
     details=""
     lastHop= "current"
