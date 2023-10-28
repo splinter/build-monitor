@@ -26,8 +26,8 @@ def debug_time_info(logMessage):
         print(i)
 
         time = datetime.datetime.fromtimestamp(float(timestamps[i]))
-        print(time)
-        
+        print(last)
+
         diff = last - time
         details=" hop "+ lastHop +" to hop" +  i + " = " + diff +"s "
         last = time
