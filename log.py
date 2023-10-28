@@ -29,9 +29,9 @@ def debug_time_info(logMessage):
         details = details + " hop "+ str(lastHop) +" to hop " +  str(i) + " = " + str(diff) +"s "
         last = time
         lastHop=i
-        lastTime = time
+        lastTime = last
     time = datetime.datetime.fromtimestamp((float(timestamps[0])))
-    diff = (datetime.datetime.fromtimestamp(lastTime) - time).total_seconds()
+    diff = ( lastTime - time).total_seconds()
     i=0
     details = details + " |  hop " + str(lastHop) + " to hop 0"+ str(i) + " = " + str(diff) + "s"
     logging.info(details)
